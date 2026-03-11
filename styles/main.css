@@ -1,0 +1,631 @@
+@charset "UTF-8";
+:root {
+  --color-white: #ffffff;
+  --color-black: #000;
+  --color-test: rgb(227, 211, 205);
+  --color-test2: rgba(227, 211, 205, 0.4);
+  --font-family-base: "CormorantInfantLight", sans-serif;
+  --font-family-accent: "CormorantInfantRegular", sans-serif;
+  --font-family-special: "WonderGardene", sans-serif;
+  --container-width: 430px;
+  --container-padding-x: 15px;
+}
+
+/**
+  Нормализация блочной модели
+ */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
+  Убираем внутренние отступы слева тегам списков,
+  у которых есть атрибут class
+ */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
+body,
+:where(blockquote, figure, fieldset):where([class]) {
+  margin: 0;
+}
+
+/**
+  Убираем внешние отступы вертикали нужным тегам,
+  у которых есть атрибут class
+ */
+:where(h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  padding: 0;
+  border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+ */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+ */
+p {
+  margin-block: 0;
+}
+
+/**
+  Внешний отступ вниз для параграфа без атрибута class,
+  который расположен не последним среди своих соседних элементов
+ */
+/**
+  Упрощаем работу с изображениями и видео
+ */
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  height: 100%;
+  /**
+    Убираем скачок интерфейса по горизонтали
+    при появлении / исчезновении скроллбара
+   */
+  scrollbar-gutter: stable;
+  /**
+    Плавный скролл
+   */
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  min-height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+}
+
+/**
+  Нормализация высоты элемента ссылки при его инспектировании в DevTools
+ */
+a:where([class]) {
+  display: inline-flex;
+}
+
+/**
+  Курсор-рука при наведении на элемент
+ */
+button,
+label {
+  cursor: pointer;
+}
+
+/**
+  Убирает серую подсветку при тапе на мобильных устройствах (iOS/Android)
+ */
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут fill со значением 'none' или начинается с 'url')
+ */
+:where([fill]:not([fill=none],
+[fill^=url])) {
+  fill: currentColor;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут stroke со значением 'none')
+ */
+:where([stroke]:not([stroke=none],
+[stroke^=url])) {
+  stroke: currentColor;
+}
+
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+  Приведение рамок таблиц в классический 'collapse' вид
+ */
+:where(table) {
+  border-collapse: collapse;
+  border-color: currentColor;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@font-face {
+  font-family: "CormorantInfantLight";
+  src: url("../fonts/CormorantInfant-Light.woff") format("woff");
+  font-weight: 300;
+  font-size: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "CormorantInfantRegular";
+  src: url("../fonts/CormorantInfant-Regular.woff") format("woff");
+  font-weight: 400;
+  font-size: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "WonderGardene";
+  src: url("../fonts/WonderGardene.woff") format("woff");
+  font-size: normal;
+  font-display: swap;
+}
+body {
+  font-family: var(--font-family-base);
+  color: var(--color-black);
+  background-color: var(--color-white);
+}
+
+.container {
+  max-width: var(--container-width);
+  padding: 0 var(--container-padding-x);
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
+  font-weight: 500;
+}
+
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  font-weight: 600;
+}
+
+h1,
+.h1 {
+  font-size: 30px;
+}
+
+h2,
+.h2 {
+  font-size: 53px;
+}
+
+h3,
+.h3 {
+  font-size: 36.5px;
+}
+
+h4,
+.h4 {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+a {
+  color: inherit;
+}
+a[class] {
+  text-decoration: none;
+}
+
+:focus-visible {
+  transition-duration: 0s !important;
+}
+
+a[aria-label],
+button[aria-label] {
+  position: relative;
+}
+a[aria-label]::before,
+button[aria-label]::before {
+  content: "";
+}
+
+span {
+  font-family: var(--font-family-special);
+  display: block;
+  line-height: 1;
+}
+
+.main {
+  height: 100vh;
+}
+.main__img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.main__img--wrapper {
+  position: absolute;
+  transform: scale(1.1) rotate(0deg);
+  width: 107.5%;
+  height: 72%;
+  left: -26%;
+  top: 7.5%;
+  margin: auto;
+  background-image: url("../../images/5.png");
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+.main__text {
+  height: 100%;
+  padding-top: 30%;
+  padding-right: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 30%;
+}
+.main__text--top {
+  font-size: 27px;
+}
+.main__text--top span {
+  font-size: 50px;
+  float: right;
+}
+.main__text--bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 50px;
+}
+.main__name {
+  text-align: end;
+}
+.main__name div {
+  line-height: 1;
+}
+.main__name span {
+  display: block;
+  padding-right: 10px;
+  font-size: 50px;
+  line-height: 0.8;
+}
+.main__date {
+  font-size: 20px;
+}
+.main__date p {
+  padding-right: 20px;
+}
+.main__date p:last-child {
+  font-size: 17px;
+  text-align: end;
+  padding-right: 0;
+}
+
+.timer {
+  display: flex;
+  gap: 25px;
+  font-weight: 700;
+  font-size: 24px;
+}
+.timer__block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.timer__text {
+  font-size: 14px;
+}
+
+.info {
+  position: relative;
+}
+.info::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.78);
+  z-index: 2;
+}
+.info__content {
+  position: relative;
+  z-index: 3;
+  padding: 30px;
+  text-align: center;
+}
+.info__title {
+  font-size: 80px;
+}
+.info__text {
+  font-size: 22px;
+}
+.info__text:first-of-type {
+  padding-block: 15px;
+}
+.info__map {
+  padding-top: 20px;
+}
+
+.intro {
+  padding-top: 70px;
+  background-image: url("../../images/12.png");
+  background-size: cover;
+}
+
+.wed-date,
+.wed-place {
+  background-image: url("../../images/4.png");
+  background-size: 559px;
+  position: relative;
+}
+.wed-date::after,
+.wed-place::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: linear-gradient(#ffffff, rgba(255, 255, 255, 0) 50%, #ffffff 100%);
+  z-index: 1;
+}
+
+.wed-place .info__content {
+  padding-top: 0px;
+}
+
+.dresscode {
+  background-image: url("../../images/6.png");
+  background-size: cover;
+  background-position: 200px 0;
+  background-repeat: no-repeat;
+}
+
+.anketa {
+  background-image: url("../../images/8.png");
+  background-size: 430px;
+  background-repeat: no-repeat;
+  background-position-y: 190px;
+  position: relative;
+}
+.anketa::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: linear-gradient(#ffffff, rgba(255, 255, 255, 0) 50%, #ffffff 100%);
+  z-index: 1;
+}
+
+.plan {
+  background-image: url("../../images/9.png");
+  background-size: contain;
+  background-position-y: 120px;
+}
+
+.details__wrapper {
+  background-image: url("../../images/10.png");
+  background-size: 430px;
+  background-repeat: no-repeat;
+  background-position: -30px 150px;
+}
+
+.calendar {
+  padding-block: 20px;
+}
+.calendar__month {
+  padding-bottom: 15px;
+  font-size: 24px;
+}
+.calendar__table {
+  display: grid;
+  grid-template-areas: "days days days days days days days" "days days days days days days days" "days days days days days days days" "days days days days days days days" "days days days days days days days" "days days days days days days days";
+  grid-template-columns: auto auto auto auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto auto auto;
+  place-items: center;
+  row-gap: 10px;
+}
+.calendar__day {
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 36px;
+  text-transform: uppercase;
+  font-family: var(--font-family-accent);
+}
+.calendar__day:nth-child(6), .calendar__day:nth-child(7) {
+  color: red;
+}
+.calendar__date {
+  font-family: var(--font-family-accent);
+  font-size: 22px;
+  line-height: 120%;
+}
+.calendar__active {
+  color: red;
+  position: relative;
+}
+.calendar__active::after {
+  content: "";
+  position: absolute;
+  left: -20px;
+  right: -25px;
+  top: -30px;
+  bottom: -20px;
+  transform: scale(0.8) rotate(0deg);
+  background: url(../../icons/ring.svg) no-repeat center center;
+  z-index: -1;
+  background-size: cover;
+}
+
+.dresscode__colors {
+  padding-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.dresscode__color {
+  height: 116px;
+  width: 116px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.dresscode .info__text {
+  padding-top: 30px;
+}
+
+.plan__col {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.plan__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.plan__img {
+  max-width: 200px;
+  max-height: 120px;
+}
+.plan__text {
+  font-weight: var(--font-family-accent);
+  font-size: 23px;
+  font-weight: 600;
+}
+.plan__description {
+  font-weight: var(--font-family-base);
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.ccontacts {
+  padding-top: 50px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  font-size: 22px;
+}
+.form__row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.form__label--text {
+  text-align: left;
+}
+.form__input {
+  width: 370px;
+  padding: 10px;
+  border: 1px solid var(--color-black);
+  border-radius: 10px;
+  outline: none;
+}
+.form__radio, .form__check {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+.form__check--label {
+  display: flex;
+}
+.form__button {
+  width: 185px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--color-test);
+  outline: none;
+}
+
+.end {
+  background-image: url("../../images/1.png");
+  background-size: 300px;
+  background-repeat: no-repeat;
+  background-position-y: -160px;
+}
+.end__title {
+  text-align: right;
+  padding-right: 12px;
+}
+
+/*# sourceMappingURL=main.css.map */

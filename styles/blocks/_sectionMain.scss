@@ -1,0 +1,72 @@
+.main {
+  height: 100vh;
+
+  &__img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    &--wrapper {
+      position: absolute;
+      transform: scale(1.1) rotate(0deg);
+      width: 107.5%;
+      height: 72%;
+      left: -26%;
+      top: 7.5%;
+      margin: auto;
+      background-image: url("../../images/5.png");
+      background-size: contain;
+      background-position: 50%;
+      background-repeat: no-repeat;
+    }
+  }
+
+  &__text {
+    height: 100%;
+    padding-top: 30%;
+    padding-right: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 30%;
+
+    &--top {
+      font-size: 27px;
+      span {
+        font-size: 50px;
+        float: right;
+      }
+    }
+
+    &--bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      gap: 50px;
+    }
+  }
+
+  &__name {
+    text-align: end;
+    div {
+      line-height: 1;
+    }
+    span {
+      display: block;
+      padding-right: 10px;
+      font-size: 50px;
+      line-height: 0.8;
+    }
+  }
+
+  &__date {
+    font-size: 20px;
+    p {
+      padding-right: 20px;
+    }
+    p:last-child {
+      font-size: 17px;
+      text-align: end;
+      padding-right: 0;
+    }
+  }
+}

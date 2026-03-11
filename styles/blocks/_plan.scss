@@ -1,0 +1,28 @@
+.plan {
+  &__col {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  &__img {
+    max-width: 200px;
+    max-height: 120px;
+  }
+  &__text {
+    font-weight: var(--font-family-accent);
+    font-size: 23px;
+    font-weight: 600;
+  }
+  &__description {
+    font-weight: var(--font-family-base);
+    font-size: 22px;
+    font-weight: 400;
+  }
+}

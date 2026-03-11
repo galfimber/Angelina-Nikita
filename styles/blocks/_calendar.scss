@@ -1,0 +1,54 @@
+.calendar {
+    padding-block: 20px;
+  &__month {
+    padding-bottom: 15px;
+    font-size: 24px;
+  }
+  &__table {
+    display: grid;
+    grid-template-areas:
+      "days days days days days days days"
+      "days days days days days days days"
+      "days days days days days days days"
+      "days days days days days days days"
+      "days days days days days days days"
+      "days days days days days days days";
+    grid-template-columns: auto auto auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto auto;
+    place-items: center;
+
+    row-gap: 10px;
+  }
+  &__day {
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 36px;
+    text-transform: uppercase;
+    font-family: var(--font-family-accent);
+    &:nth-child(6),
+    &:nth-child(7) {
+      color: red;
+    }
+  }
+  &__date {
+    font-family: var(--font-family-accent);
+    font-size: 22px;
+    line-height: 120%;
+  }
+  &__active {
+    color: red;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      left: -20px;
+      right: -25px;
+      top: -30px;
+      bottom: -20px;
+      transform: scale(0.8) rotate(0deg);
+      background: url(../../icons/ring.svg) no-repeat center center;
+      z-index: -1;
+      background-size: cover;
+    }
+  }
+}

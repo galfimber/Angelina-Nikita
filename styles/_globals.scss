@@ -1,0 +1,135 @@
+body {
+  // @include fluid-text(18, 14);
+  // display: flex;
+  // flex-direction: column;
+  font-family: var(--font-family-base);
+  // letter-spacing: -0.03em;
+  color: var(--color-black);
+  background-color: var(--color-white);
+}
+
+// main {
+//   flex-grow: 1;
+// }
+
+.container {
+  max-width: var(--container-width);
+  padding: 0 var(--container-padding-x);
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  // color: var(--color-light);
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
+  // font-weight: var(--font-family-accent);
+  font-weight: 500;
+}
+
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  font-weight: 600;
+}
+
+h1,
+.h1 {
+  // @include fluid-text(70, 30);
+  font-size: 30px;
+  // line-height: 1.75em;
+}
+
+h2,
+.h2 {
+  font-size: 53px;
+  // line-height: 1.75em;
+}
+
+h3,
+.h3 {
+  font-size: 36.5px;
+  // line-height: 1.5em;
+}
+
+h4,
+.h4 {
+  font-size: 24px;
+  font-weight: 400;
+  // @include fluid-text(26, 18);
+}
+
+h5,
+.h5 {
+  // @include fluid-text(24, 18);
+}
+
+h6,
+.h6 {
+  // @include fluid-text(20, 16);
+}
+
+a,
+button,
+label,
+input,
+textarea,
+select,
+svg * {
+  // transition-duration: var(--transition-duration);
+}
+
+a {
+  color: inherit;
+
+  // @include hover {
+  //   color: var(--color-accent);
+  // }
+
+  &[class] {
+    text-decoration: none;
+  }
+}
+
+:focus-visible {
+  // outline: rem(2) dashed var(--color-light);
+  // outline-offset: rem(4);
+  transition-duration: 0s !important;
+}
+
+a,
+button {
+  &[aria-label] {
+    position: relative;
+
+    &::before {
+      // @include abs-center;
+      // @include square(rem(44));
+      content: "";
+    }
+  }
+}
+
+span {
+  font-family: var(--font-family-special);
+  display: block;
+  line-height: 1;
+}

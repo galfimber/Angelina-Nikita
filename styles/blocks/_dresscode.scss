@@ -1,0 +1,18 @@
+.dresscode{
+    &__colors{
+        padding-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    &__color{
+        height: 116px;
+        width: 116px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    .info__text{
+        padding-top: 30px;
+    }
+}
