@@ -11,9 +11,5 @@
   "description": "",
   "devDependencies": {
     "sass": "^1.97.3"
-  },
-  "dependencies": {
-    "cors": "^2.8.6",
-    "node-telegram-bot-api": "^0.67.0"
   }
 }
