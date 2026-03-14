@@ -81,3 +81,32 @@ musicControls.addEventListener("click", () => {
 window.onload = function () {
   music.volume = 1;
 };
+
+const form = document.querySelector(".form");
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const formData = new FormData(form);
+  const check = [];
+  document.querySelectorAll('input[type="checkbox"]:checked').forEach((i) => {
+    check.push(i.parentElement.textContent);
+  });
+  const person = formData.get("name");
+  const personStatus = formData.get("status");
+
+  console.log("Имя:", person);
+  console.log("Статус:", personStatus);
+  console.log("Алкоголь:", check);
+
+  emailjs.init("i4Bis3O3WkD58LKFx");
+
+  emailjs
+    .send("default_service", "template_89j125n", {
+      to_name: "Имя",
+      message: `Имя: ${person}
+    Статус: ${personStatus}
+    Алкоголь: ${check.join(", ")}`,
+    })
+    .then((response) => console.log("Письмо успешно отправлено!", response))
+    .catch((error) => console.log("Возникла ошибка...", error));
+});
