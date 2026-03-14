@@ -10,6 +10,31 @@
   <body>
     <div class="container">
       <section class="main">
+        <div class="main__music music">
+          <audio controls autoplay="autoplay" loop class="music__player">
+            <source src="./music/compress (mp3cut.net).mp3" type="audio/mpeg" />
+          </audio>
+          <div class="music__controls">
+            <div class="music__controls--btn"></div>
+          </div>
+          <div class="music__equalizer">
+            <div class="music__col">
+              <div class="music__row music__row--1"></div>
+            </div>
+            <div class="music__col">
+              <div class="music__row music__row--2"></div>
+            </div>
+            <div class="music__col">
+              <div class="music__row music__row--3"></div>
+            </div>
+            <div class="music__col">
+              <div class="music__row music__row--4"></div>
+            </div>
+            <div class="music__col">
+              <div class="music__row music__row--5"></div>
+            </div>
+          </div>
+        </div>
         <div class="main__img">
           <div class="main__img--wrapper"></div>
           <!-- <img src="./images/5.png" alt="" /> -->
@@ -47,12 +72,6 @@
                 <div class="timer__text timer__seconds--text">секунды</div>
               </div>
             </div>
-            <audio controls autoplay="autoplay">
-              <source
-                src="./music/compress.mp3"
-                type="audio/mpeg"
-              />
-            </audio>
           </div>
         </div>
       </section>

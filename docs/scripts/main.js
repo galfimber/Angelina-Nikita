@@ -37,8 +37,12 @@ document.addEventListener("DOMContentLoaded", () => {
     elMinutes.textContent = String(minutes).padStart(2, "0");
     elSeconds.textContent = String(seconds).padStart(2, "0");
 
-    elDaysText.textContent = String(declensionNum(days, ["день", "дня", "дней"]));
-    elHoursText.textContent = String(declensionNum(hours, ["час", "часа", "часов"]));
+    elDaysText.textContent = String(
+      declensionNum(days, ["день", "дня", "дней"]),
+    );
+    elHoursText.textContent = String(
+      declensionNum(hours, ["час", "часа", "часов"]),
+    );
     elMinutesText.textContent = declensionNum(minutes, [
       "минута",
       "минуты",
@@ -60,3 +64,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const timerId = setInterval(updateTimer, 1000);
 });
 
+const musicControls = document.querySelector(".music__controls");
+const musicControlsBtn = document.querySelector(".music__controls--btn");
+const music = document.querySelector(".music__player");
+music.volume = 0;
+
+musicControls.addEventListener("click", () => {
+  musicControlsBtn.classList.toggle("pause");
+  if (!musicControlsBtn.classList.contains("pause")) {
+    music.play();
+  } else {
+    music.pause();
+  }
+});
+
+window.onload = function () {
+  music.volume = 1;
+};

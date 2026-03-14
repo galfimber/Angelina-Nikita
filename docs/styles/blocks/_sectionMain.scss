@@ -1,6 +1,7 @@
 .main {
   height: 100vh;
   max-height: 950px;
+  position: relative;
 
   &__img {
     position: absolute;
@@ -33,7 +34,7 @@
     gap: 30%;
 
     &--top {
-      font-size: 27px;
+      font-size: 33px;
       span {
         font-size: 50px;
         float: right;
