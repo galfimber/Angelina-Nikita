@@ -5,7 +5,13 @@ body {
   font-family: var(--font-family-base);
   // letter-spacing: -0.03em;
   color: var(--color-black);
-  background-color: var(--color-white);
+  background-color: var(--color-test2);
+  > .container {
+    margin: 0 auto;
+    background-color: white;
+    padding: 0;
+    box-shadow: 0 0 10px 5px #ffffff;
+  }
 }
 
 // main {

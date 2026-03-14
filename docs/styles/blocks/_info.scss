@@ -26,6 +26,9 @@
   }
   &__map {
     padding-top: 20px;
+    iframe {
+      max-width: 100%;
+    }
   }
 }
 
@@ -56,8 +59,8 @@
   }
 }
 
-.wed-place{
-  .info__content{
+.wed-place {
+  .info__content {
     padding-top: 0px;
   }
 }

@@ -230,7 +230,13 @@ svg * {
 body {
   font-family: var(--font-family-base);
   color: var(--color-black);
-  background-color: var(--color-white);
+  background-color: var(--color-test2);
+}
+body > .container {
+  margin: 0 auto;
+  background-color: white;
+  padding: 0;
+  box-shadow: 0 0 10px 5px #ffffff;
 }
 
 .container {
@@ -305,11 +311,14 @@ span {
 
 .main {
   height: 100vh;
+  max-height: 950px;
 }
 .main__img {
   position: absolute;
   height: 100%;
+  max-width: 430px;
   width: 100%;
+  overflow: hidden;
 }
 .main__img--wrapper {
   position: absolute;
@@ -412,6 +421,9 @@ span {
 }
 .info__map {
   padding-top: 20px;
+}
+.info__map iframe {
+  max-width: 100%;
 }
 
 .intro {
