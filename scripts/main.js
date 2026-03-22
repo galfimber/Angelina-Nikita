@@ -83,9 +83,24 @@ window.onload = function () {
 };
 
 const form = document.querySelector(".form");
+const popup = document.getElementById("popup");
+
+function closePopup() {
+  popup.classList.remove("active");
+  document.body.classList.remove("lock");
+}
+popup.addEventListener("click", function (e) {
+  if (e.target === popup) {
+    closePopup();
+  }
+});
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
+
+  popup.classList.add("active");
+  document.body.classList.add("lock");
+
   const formData = new FormData(form);
   const check = [];
   document.querySelectorAll('input[type="checkbox"]:checked').forEach((i) => {
@@ -110,3 +125,22 @@ form.addEventListener("submit", function (event) {
     .then((response) => console.log("Письмо успешно отправлено!", response))
     .catch((error) => console.log("Возникла ошибка...", error));
 });
+
+function openEnvelope() {
+  const envelope = document.getElementById("envelope");
+  const overlay = document.getElementById("overlay");
+
+  envelope.classList.add("fly");
+  envelope.classList.add("fade-out");
+  document.body.classList.remove("lock");
+
+  music.play();
+
+  setTimeout(() => {
+    overlay.classList.add("fade-out");
+  }, 800);
+
+  setTimeout(() => {
+    overlay.style.display = "none";
+  }, 2000);
+}

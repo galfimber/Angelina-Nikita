@@ -7,11 +7,31 @@
     <link rel="stylesheet" href="./styles/main.css" />
     <script src="./scripts/main.js" defer></script>
   </head>
-  <body>
+  <body class="lock">
+    <!-- <div class="mail">
+      <div class="mail__wrapper">
+        <div class="mail__right"></div>
+        <div class="mail__left"></div>
+        <div class="mail__top"><button class="mail__btn">Нажми</button></div>
+        <div class="mail__bottom"></div>
+      </div>
+    </div> -->
+
+    <div class="overlay" id="overlay">
+      <div class="envelope" id="envelope">
+        <div class="flap top"></div>
+        <div class="flap bottom"></div>
+        <div class="flap left"></div>
+        <div class="flap right"></div>
+
+        <button class="btn" onclick="openEnvelope()">Нажми</button>
+      </div>
+    </div>
+
     <div class="container">
       <section class="main">
         <div class="main__music music">
-          <audio controls autoplay="autoplay" loop class="music__player">
+          <audio controls loop class="music__player">
             <source src="./music/compress (mp3cut.net).mp3" type="audio/mpeg" />
           </audio>
           <div class="music__controls">
@@ -52,7 +72,7 @@
             </h1>
             <div class="main__date">
               <p>09 августа 2026</p>
-              <p>СУББОТА, 15:00</p>
+              <p>ВОСКРЕСЕНЬЕ, 15:00</p>
             </div>
             <div class="main__timer timer">
               <div class="timer__block">
@@ -443,6 +463,12 @@
         <h2 class="end__title">МЫ <br />БУДЕМ РАДЫ ВИДЕТЬ ВАС!</h2>
         <img src="./images/footer1.svg" alt="" />
       </section>
+      <div class="popup-overlay" id="popup">
+        <div class="popup">
+          <h2>Форма успешно отправлена</h2>
+          <button class="close-btn" onclick="closePopup()">Закрыть</button>
+        </div>
+      </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   </body>

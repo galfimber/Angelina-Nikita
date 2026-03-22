@@ -762,6 +762,26 @@ span {
   object-fit: cover;
   border-radius: 50%;
 }
+@media (max-width: 428px) {
+  .dresscode__color:nth-child(1) {
+    order: 1;
+  }
+  .dresscode__color:nth-child(2) {
+    order: 4;
+  }
+  .dresscode__color:nth-child(3) {
+    order: 5;
+  }
+  .dresscode__color:nth-child(4) {
+    order: 2;
+  }
+  .dresscode__color:nth-child(5) {
+    order: 4;
+  }
+  .dresscode__color:nth-child(6) {
+    order: 6;
+  }
+}
 .dresscode .info__text {
   padding-top: 30px;
 }
@@ -838,6 +858,63 @@ span {
   color: var(--color-black);
 }
 
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 999;
+}
+
+/* Активное состояние */
+.popup-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Сам попап */
+.popup {
+  background: white;
+  padding: 30px 20px;
+  border-radius: 16px;
+  text-align: center;
+  width: 80%;
+  max-width: 320px;
+  transform: scale(0.9);
+  transition: transform 0.4s ease;
+}
+
+/* Анимация появления */
+.popup-overlay.active .popup {
+  transform: scale(1);
+}
+
+/* Текст */
+.popup h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+/* Кнопка */
+.close-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  background: var(--color-test);
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 .end {
   background-image: url("../images/1.PNG");
   background-size: 300px;
@@ -847,6 +924,128 @@ span {
 .end__title {
   text-align: right;
   padding-right: 12px;
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* Фон */
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-test);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: opacity 3.2s ease;
+}
+
+/* Конверт */
+.envelope {
+  position: relative;
+  width: 90vw;
+  height: 65vh;
+  max-width: 520px;
+  max-height: 300px;
+  background-color: rgb(195, 168, 158);
+}
+
+/* Створки */
+.flap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #ffffff, #f3e9dd);
+  transition: transform 3.2s cubic-bezier(0.7, 0, 0.3, 1), opacity 1s;
+}
+
+/* Треугольники */
+.top {
+  clip-path: polygon(0 0, 100% 0, 50% 50%);
+}
+
+.bottom {
+  clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+}
+
+.left {
+  clip-path: polygon(0 0, 0 100%, 50% 50%);
+}
+
+.right {
+  clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+}
+
+/* ===== КРУГЛАЯ КНОПКА ===== */
+.btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: none;
+  background: rgb(195, 168, 158);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Лёгкий эффект нажатия */
+.btn:active {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+/* Анимация разлёта */
+.fly .top {
+  transform: translateY(-180%);
+  opacity: 0.9;
+}
+
+.fly .bottom {
+  transform: translateY(180%);
+  opacity: 0.9;
+}
+
+.fly .left {
+  transform: translateX(-180%);
+  opacity: 0.9;
+}
+
+.fly .right {
+  transform: translateX(180%);
+  opacity: 0.9;
+}
+
+/* Исчезновение */
+.overlay.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.envelope.fade-out {
+  background-color: transparent;
+}
+
+.lock {
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=main.css.map */
