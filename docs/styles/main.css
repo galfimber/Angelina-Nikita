@@ -623,9 +623,7 @@ span {
 }
 .info__text {
   font-size: 22px;
-}
-.info__text:first-of-type {
-  padding-block: 15px;
+  padding-top: 15px;
 }
 .info__map {
   padding-top: 20px;
@@ -832,6 +830,10 @@ span {
 .form__label--text {
   text-align: left;
 }
+.form__name--error, .form__radio--error, .form__check--error {
+  color: red;
+  display: none;
+}
 .form__input {
   width: 370px;
   padding: 10px;
@@ -856,6 +858,10 @@ span {
   background-color: var(--color-test);
   outline: none;
   color: var(--color-black);
+}
+
+.error__active {
+  display: block;
 }
 
 .popup-overlay {

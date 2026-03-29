@@ -20,9 +20,7 @@
   }
   &__text {
     font-size: 22px;
-    &:first-of-type {
-      padding-block: 15px;
-    }
+    padding-top: 15px;
   }
   &__map {
     padding-top: 20px;
@@ -70,8 +68,6 @@
   background-size: cover;
   background-position: 200px 0;
   background-repeat: no-repeat;
-}
-.plan {
 }
 .anketa {
   background-image: url("../images/8.png");

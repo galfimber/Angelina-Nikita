@@ -95,35 +95,65 @@ popup.addEventListener("click", function (e) {
   }
 });
 
+const validate = (person, personStatus, checked) => {
+  const nameInput = document.querySelector(".form__name--error");
+  const radioInput = document.querySelector(".form__radio--error");
+  const checkInput = document.querySelector(".form__check--error");
+
+  if (!person) {
+    nameInput.classList.add("error__active");
+  } else {
+    nameInput.classList.remove("error__active");
+  }
+  if (!personStatus) {
+    radioInput.classList.add("error__active");
+  } else {
+    radioInput.classList.remove("error__active");
+  }
+  if (checked.length < 1) {
+    checkInput.classList.add("error__active");
+  } else {
+    checkInput.classList.remove("error__active");
+  }
+  if (person && personStatus && checked.length > 1) {
+    console.log(1);
+    return true;
+  }
+};
+
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  popup.classList.add("active");
-  document.body.classList.add("lock");
+  const checkbox = document.querySelectorAll('input[type="checkbox"]:checked');
 
   const formData = new FormData(form);
-  const check = [];
-  document.querySelectorAll('input[type="checkbox"]:checked').forEach((i) => {
-    check.push(i.parentElement.textContent);
+  const checked = [];
+  checkbox.forEach((i) => {
+    checked.push(i.parentElement.textContent);
   });
   const person = formData.get("name");
   const personStatus = formData.get("status");
 
-  console.log("Имя:", person);
-  console.log("Статус:", personStatus);
-  console.log("Алкоголь:", check);
+  const isValid = validate(person, personStatus, checked);
+  if (isValid) {
+    console.log("Имя:", person);
+    console.log("Статус:", personStatus);
+    console.log("Алкоголь:", checked);
 
-  emailjs.init("i4Bis3O3WkD58LKFx");
+    // emailjs.init("i4Bis3O3WkD58LKFx");
 
-  emailjs
-    .send("default_service", "template_89j125n", {
-      to_name: "Имя",
-      message: `Имя: ${person}
-    Статус: ${personStatus}
-    Алкоголь: ${check.join(", ")}`,
-    })
-    .then((response) => console.log("Письмо успешно отправлено!", response))
-    .catch((error) => console.log("Возникла ошибка...", error));
+    // emailjs
+    //   .send("default_service", "template_89j125n", {
+    //     to_name: "Имя",
+    //     message: `Имя: ${person}
+    //   Статус: ${personStatus}
+    //   Алкоголь: ${checked.join(", ")}`,
+    //   })
+    //   .then((response) => console.log("Письмо успешно отправлено!", response))
+    //   .catch((error) => console.log("Возникла ошибка...", error));
+    popup.classList.add("active");
+    document.body.classList.add("lock");
+  }
 });
 
 function openEnvelope() {
