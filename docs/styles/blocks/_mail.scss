@@ -45,10 +45,10 @@
 
 /* Треугольники */
 .top {
-  clip-path: polygon(0 0, 100% 0, 50% 50%);
+  clip-path: polygon(1% 0, 99% 0, 50% 50%);
 }
 .bottom {
-  clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+  clip-path: polygon(0 101%, 99% 100%, 50% 50%);
 }
 .left {
   clip-path: polygon(0 0, 0 100%, 50% 50%);
