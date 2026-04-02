@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Установите конечную дату
-  const deadline = new Date("2026-08-08T15:00:00");
+  const deadline = new Date("2026-08-09T15:00:00");
 
-  // Найдите элементы DOM
   const elDays = document.querySelector(".timer__days");
   const elHours = document.querySelector(".timer__hours");
   const elMinutes = document.querySelector(".timer__minutes");
@@ -13,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const elMinutesText = document.querySelector(".timer__minutes--text");
   const elSecondsText = document.querySelector(".timer__seconds--text");
 
-  // Функция склонения числительных
   const declensionNum = (num, words) => {
     return words[
       num % 100 > 4 && num % 100 < 20
@@ -22,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
   };
 
-  // Функция обновления таймера
+  let timerId;
   const updateTimer = () => {
     const now = new Date();
     const diff = Math.max(0, deadline - now);
@@ -37,12 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
     elMinutes.textContent = String(minutes).padStart(2, "0");
     elSeconds.textContent = String(seconds).padStart(2, "0");
 
-    elDaysText.textContent = String(
-      declensionNum(days, ["день", "дня", "дней"]),
-    );
-    elHoursText.textContent = String(
-      declensionNum(hours, ["час", "часа", "часов"]),
-    );
+    elDaysText.textContent = declensionNum(days, ["день", "дня", "дней"]);
+    elHoursText.textContent = declensionNum(hours, ["час", "часа", "часов"]);
     elMinutesText.textContent = declensionNum(minutes, [
       "минута",
       "минуты",
@@ -59,118 +52,148 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Запустите таймер
   updateTimer();
-  const timerId = setInterval(updateTimer, 1000);
-});
+  timerId = setInterval(updateTimer, 1000);
 
-const musicControls = document.querySelector(".music__controls");
-const musicControlsBtn = document.querySelector(".music__controls--btn");
-const music = document.querySelector(".music__player");
-music.volume = 0;
+  const musicControls = document.querySelector(".music__controls");
+  const musicControlsBtn = document.querySelector(".music__controls--btn");
+  const music = document.querySelector(".music__player");
 
-musicControls.addEventListener("click", () => {
-  musicControlsBtn.classList.toggle("pause");
-  if (!musicControlsBtn.classList.contains("pause")) {
-    music.play();
-  } else {
-    music.pause();
+  if (musicControls) {
+    musicControls.addEventListener("click", () => {
+      musicControlsBtn.classList.toggle("pause");
+      if (!musicControlsBtn.classList.contains("pause")) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    });
   }
-});
 
-window.onload = function () {
-  music.volume = 1;
-};
-
-const form = document.querySelector(".form");
-const popup = document.getElementById("popup");
-
-function closePopup() {
-  popup.classList.remove("active");
-  document.body.classList.remove("lock");
-}
-popup.addEventListener("click", function (e) {
-  if (e.target === popup) {
-    closePopup();
-  }
-});
-
-const validate = (person, personStatus, checked) => {
-  const nameInput = document.querySelector(".form__name--error");
-  const radioInput = document.querySelector(".form__radio--error");
-  const checkInput = document.querySelector(".form__check--error");
-
-  if (!person) {
-    nameInput.classList.add("error__active");
-  } else {
-    nameInput.classList.remove("error__active");
-  }
-  if (!personStatus) {
-    radioInput.classList.add("error__active");
-  } else {
-    radioInput.classList.remove("error__active");
-  }
-  if (checked.length < 1) {
-    checkInput.classList.add("error__active");
-  } else {
-    checkInput.classList.remove("error__active");
-  }
-  if (person && personStatus && checked.length > 1) {
-    console.log(1);
-    return true;
-  }
-};
-
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  const checkbox = document.querySelectorAll('input[type="checkbox"]:checked');
-
-  const formData = new FormData(form);
-  const checked = [];
-  checkbox.forEach((i) => {
-    checked.push(i.parentElement.textContent);
+  window.addEventListener("load", () => {
+    if (music) music.volume = 1;
   });
-  const person = formData.get("name");
-  const personStatus = formData.get("status");
 
-  const isValid = validate(person, personStatus, checked);
-  if (isValid) {
-    console.log("Имя:", person);
-    console.log("Статус:", personStatus);
-    console.log("Алкоголь:", checked);
+  const form = document.querySelector(".form");
+  const popup = document.getElementById("popup");
+  const popupMessage = document.getElementById("popup-message");
+  const popupClose = document.getElementById("popup-close");
+  const envelopeBtn = document.getElementById("envelope-btn");
 
-    // emailjs.init("i4Bis3O3WkD58LKFx");
+  function closePopup() {
+    popup.classList.remove("active");
+    document.body.classList.remove("lock");
+  }
 
-    // emailjs
-    //   .send("default_service", "template_89j125n", {
-    //     to_name: "Имя",
-    //     message: `Имя: ${person}
-    //   Статус: ${personStatus}
-    //   Алкоголь: ${checked.join(", ")}`,
-    //   })
-    //   .then((response) => console.log("Письмо успешно отправлено!", response))
-    //   .catch((error) => console.log("Возникла ошибка...", error));
+  function showPopup(message) {
+    popupMessage.textContent = message;
     popup.classList.add("active");
     document.body.classList.add("lock");
   }
+
+  if (popupClose) {
+    popupClose.addEventListener("click", closePopup);
+  }
+
+  if (popup) {
+    popup.addEventListener("click", function (e) {
+      if (e.target === popup) {
+        closePopup();
+      }
+    });
+  }
+
+  const validate = (person, personStatus, checked) => {
+    const nameInput = document.querySelector(".form__name--error");
+    const radioInput = document.querySelector(".form__radio--error");
+    const checkInput = document.querySelector(".form__check--error");
+
+    if (!person) {
+      nameInput.classList.add("error__active");
+      return false;
+    } else {
+      nameInput.classList.remove("error__active");
+    }
+    if (!personStatus) {
+      radioInput.classList.add("error__active");
+      return false;
+    } else {
+      radioInput.classList.remove("error__active");
+    }
+    if (checked.length < 1) {
+      checkInput.classList.add("error__active");
+      return false;
+    } else {
+      checkInput.classList.remove("error__active");
+    }
+    if (person && personStatus && checked.length >= 1) {
+      return true;
+    }
+  };
+
+  if (form) {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const checkbox = document.querySelectorAll(
+        'input[type="checkbox"]:checked',
+      );
+
+      const formData = new FormData(form);
+      const checked = [];
+      checkbox.forEach((i) => {
+        checked.push(i.parentElement.textContent);
+      });
+      const person = formData.get("name");
+      const personStatus = formData.get("status");
+
+      const isValid = validate(person, personStatus, checked);
+      if (isValid) {
+        console.log("Имя:", person);
+        console.log("Статус:", personStatus);
+        console.log("Алкоголь:", checked);
+
+        emailjs.init("i4Bis3O3WkD58LKFx");
+
+        emailjs
+          .send("default_service", "template_89j125n", {
+            to_name: "Имя",
+            message: `Имя: ${person}
+          Статус: ${personStatus}
+          Алкоголь: ${checked.join(", ")}`,
+          })
+          .then((response) => {
+            console.log("Письмо успешно отправлено!", response);
+            showPopup("Форма успешно отправлена");
+          })
+          .catch((error) => {
+            console.log("Возникла ошибка...", error);
+            showPopup("Произошла ошибка, форма не отправлена");
+          });
+      }
+    });
+  }
+
+  function openEnvelope() {
+    const envelope = document.getElementById("envelope");
+    const overlay = document.getElementById("overlay");
+
+    envelope.classList.add("fly");
+    envelope.classList.add("fade-out");
+    document.body.classList.remove("lock");
+
+    if (music) music.play();
+
+    setTimeout(() => {
+      overlay.classList.add("fade-out");
+    }, 800);
+
+    setTimeout(() => {
+      overlay.style.display = "none";
+    }, 2000);
+  }
+
+  if (envelopeBtn) {
+    envelopeBtn.addEventListener("click", openEnvelope);
+  }
 });
-
-function openEnvelope() {
-  const envelope = document.getElementById("envelope");
-  const overlay = document.getElementById("overlay");
-
-  envelope.classList.add("fly");
-  envelope.classList.add("fade-out");
-  document.body.classList.remove("lock");
-
-  music.play();
-
-  setTimeout(() => {
-    overlay.classList.add("fade-out");
-  }, 800);
-
-  setTimeout(() => {
-    overlay.style.display = "none";
-  }, 2000);
-}

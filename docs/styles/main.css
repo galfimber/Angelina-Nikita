@@ -11,36 +11,21 @@
   --container-padding-x: 15px;
 }
 
-/**
-  Нормализация блочной модели
- */
 *,
 ::before,
 ::after {
   box-sizing: border-box;
 }
 
-/**
-  Убираем внутренние отступы слева тегам списков,
-  у которых есть атрибут class
- */
 :where(ul, ol):where([class]) {
   padding-left: 0;
 }
 
-/**
-  Убираем внешние отступы body и двум другим тегам,
-  у которых есть атрибут class
- */
 body,
 :where(blockquote, figure, fieldset):where([class]) {
   margin: 0;
 }
 
-/**
-  Убираем внешние отступы вертикали нужным тегам,
-  у которых есть атрибут class
- */
 :where(h1,
 h2,
 h3,
@@ -63,10 +48,6 @@ dl):where([class]) {
   border: none;
 }
 
-/**
-  Убираем стандартный маркер маркированному списку,
-  у которого есть атрибут class
- */
 :where(ul[class]) {
   list-style: none;
 }
@@ -75,22 +56,10 @@ dl):where([class]) {
   font-style: normal;
 }
 
-/**
-  Обнуляем вертикальные внешние отступы параграфа,
-  объявляем локальную переменную для внешнего отступа вниз,
-  чтобы избежать взаимодействие с более сложным селектором
- */
 p {
   margin-block: 0;
 }
 
-/**
-  Внешний отступ вниз для параграфа без атрибута class,
-  который расположен не последним среди своих соседних элементов
- */
-/**
-  Упрощаем работу с изображениями и видео
- */
 img,
 video {
   display: block;
@@ -98,9 +67,6 @@ video {
   height: auto;
 }
 
-/**
-  Наследуем свойства шрифт для полей ввода
- */
 input,
 textarea,
 select,
@@ -109,94 +75,47 @@ button {
 }
 
 html {
-  /**
-    Пригодится в большинстве ситуаций
-    (когда, например, нужно будет "прижать" футер к низу сайта)
-   */
   height: 100%;
-  /**
-    Убираем скачок интерфейса по горизонтали
-    при появлении / исчезновении скроллбара
-   */
   scrollbar-gutter: stable;
-  /**
-    Плавный скролл
-   */
   scroll-behavior: smooth;
 }
 
 body {
-  /**
-    Пригодится в большинстве ситуаций
-    (когда, например, нужно будет "прижать" футер к низу сайта)
-   */
   min-height: 100%;
-  /**
-    Унифицированный интерлиньяж
-   */
 }
 
-/**
-  Нормализация высоты элемента ссылки при его инспектировании в DevTools
- */
 a:where([class]) {
   display: inline-flex;
 }
 
-/**
-  Курсор-рука при наведении на элемент
- */
 button,
 label {
   cursor: pointer;
 }
 
-/**
-  Убирает серую подсветку при тапе на мобильных устройствах (iOS/Android)
- */
 button {
   -webkit-tap-highlight-color: transparent;
 }
 
-/**
-  Приводим к единому цвету svg-элементы
-  (за исключением тех, у которых уже указан
-  атрибут fill со значением 'none' или начинается с 'url')
- */
 :where([fill]:not([fill=none],
 [fill^=url])) {
   fill: currentColor;
 }
 
-/**
-  Приводим к единому цвету svg-элементы
-  (за исключением тех, у которых уже указан
-  атрибут stroke со значением 'none')
- */
 :where([stroke]:not([stroke=none],
 [stroke^=url])) {
   stroke: currentColor;
 }
 
-/**
-  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
- */
 svg * {
   transition-property: fill, stroke;
 }
 
-/**
-  Приведение рамок таблиц в классический 'collapse' вид
- */
 :where(table) {
   border-collapse: collapse;
   border-color: currentColor;
 }
 
-/**
-  Удаляем все анимации и переходы для людей,
-  которые предпочитают их не использовать
- */
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
@@ -297,10 +216,6 @@ a[class] {
 a[aria-label],
 button[aria-label] {
   position: relative;
-}
-a[aria-label]::before,
-button[aria-label]::before {
-  content: "";
 }
 
 span {
@@ -661,45 +576,6 @@ span {
   padding-top: 0px;
 }
 
-.dresscode {
-  background-image: url("../images/6.png");
-  background-size: cover;
-  background-position: 200px 0;
-  background-repeat: no-repeat;
-}
-
-.anketa {
-  background-image: url("../images/8.png");
-  background-size: 430px;
-  background-repeat: no-repeat;
-  background-position-y: 190px;
-  position: relative;
-}
-.anketa::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  background: linear-gradient(#ffffff, rgba(255, 255, 255, 0) 50%, #ffffff 100%);
-  z-index: 1;
-}
-
-.plan {
-  background-image: url("../images/9.png");
-  background-size: contain;
-  background-position-y: 120px;
-}
-
-.details__wrapper {
-  background-image: url("../images/10.png");
-  background-size: 430px;
-  background-repeat: no-repeat;
-  background-position: -30px 150px;
-}
-
 .calendar {
   padding-block: 20px;
 }
@@ -747,6 +623,12 @@ span {
   background-size: cover;
 }
 
+.dresscode {
+  background-image: url("../images/6.png");
+  background-size: cover;
+  background-position: 200px 0;
+  background-repeat: no-repeat;
+}
 .dresscode__colors {
   padding-top: 30px;
   display: flex;
@@ -765,7 +647,7 @@ span {
     order: 1;
   }
   .dresscode__color:nth-child(2) {
-    order: 4;
+    order: 3;
   }
   .dresscode__color:nth-child(3) {
     order: 5;
@@ -784,6 +666,11 @@ span {
   padding-top: 30px;
 }
 
+.plan {
+  background-image: url("../images/9.png");
+  background-size: contain;
+  background-position-y: 70px;
+}
 .plan__col {
   padding-top: 50px;
   display: flex;
@@ -801,7 +688,6 @@ span {
   max-height: 120px;
 }
 .plan__text {
-  font-weight: var(--font-family-accent);
   font-size: 23px;
   font-weight: 600;
 }
@@ -811,8 +697,30 @@ span {
   font-weight: 400;
 }
 
-.ccontacts {
-  padding-top: 50px;
+.details__wrapper {
+  background-image: url("../images/10.png");
+  background-size: 430px;
+  background-repeat: no-repeat;
+  background-position: -30px 150px;
+}
+
+.anketa {
+  background-image: url("../images/8.png");
+  background-size: 430px;
+  background-repeat: no-repeat;
+  background-position-y: 190px;
+  position: relative;
+}
+.anketa::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: linear-gradient(#ffffff, rgba(255, 255, 255, 0) 50%, #ffffff 100%);
+  z-index: 1;
 }
 
 .form {

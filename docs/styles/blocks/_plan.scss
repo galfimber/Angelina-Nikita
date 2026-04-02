@@ -1,4 +1,7 @@
 .plan {
+  background-image: url("../images/9.png");
+  background-size: contain;
+  background-position-y: 70px;
   &__col {
     padding-top: 50px;
     display: flex;
@@ -16,7 +19,6 @@
     max-height: 120px;
   }
   &__text {
-    font-weight: var(--font-family-accent);
     font-size: 23px;
     font-weight: 600;
   }
